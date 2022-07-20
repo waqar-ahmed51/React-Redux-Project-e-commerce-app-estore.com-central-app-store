@@ -122,8 +122,8 @@ const Product = (props) => {
         <ProductPrice>{item.price} PKR</ProductPrice>
       </ProductInfoGeneral>
       <Info>
-        <Icon>
-          <ShoppingCartOutlined onClick={() => props.addItemCart(item)} />
+        <Icon onClick={() => props.addItemCart(item)}>
+          <ShoppingCartOutlined />
         </Icon>
         <Link to={"/productview/" + item.id} className="CustomRouterLink">
           <Icon>
