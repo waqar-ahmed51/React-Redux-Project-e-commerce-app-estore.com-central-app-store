@@ -17,6 +17,7 @@ import Footer from "./components/Footer";
 import SearchResult from './pages/SearchResult';
 import styled from "styled-components";
 
+
 const PopMessage = styled.div`
 /* Some proporties will be triggered from JS functions */
   margin: 10px;
