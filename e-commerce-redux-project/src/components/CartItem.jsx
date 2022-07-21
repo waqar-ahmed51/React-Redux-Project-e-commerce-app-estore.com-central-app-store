@@ -1,6 +1,6 @@
 import { Add, DeleteOutline, Remove } from "@mui/icons-material";
 import styled from "styled-components";
-import React, { Component } from "react";
+import { useDispatch } from "react-redux";
 
 const CartProduct = styled.div`
   display: flex;
@@ -8,7 +8,7 @@ const CartProduct = styled.div`
   padding-bottom: 20px;
   padding-top: 20px;
 `;
-const ProducImage = styled.div` 
+const ProducImage = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
@@ -112,55 +112,47 @@ const DeleteProductContainer = styled.div`
   }
 `;
 
-class CartItem extends Component {
-  state = {};
-  render() {
-    const {
-      item,
-      Sn,
-      item_quantity_price,
-      item_quantity,
-      RemoveQuantity,
-      AddQuantity,
-      DeleteProduct,
-      itemid,
-    } = this.props;
-
-    return (
-      <CartProduct>
-        <ProducImage>
-          <SNumber>{Sn}</SNumber>
-          <ImageContainer>
-            <Image src={item.img} />
-          </ImageContainer>
-        </ProducImage>
-        <ProdctDetails>
-          <Title>{item.title}</Title>
-          <Desc>{item["Main Features"]}</Desc>
-          <Desc>{item.desc}</Desc>
-        </ProdctDetails>
-        <ProdctPrice>
-          <Price>{item_quantity_price} PKR</Price>
-          <QuantityPrice>
-            <QuantityButtonContainer>
-              <QuantityButton>
-                <Remove onClick={() => RemoveQuantity(itemid)} />
-              </QuantityButton>
-              <Quantity>{item_quantity}</Quantity>
-              <QuantityButton>
-                <Add onClick={() => AddQuantity(itemid)} />
-              </QuantityButton>
-            </QuantityButtonContainer>
-          </QuantityPrice>
-        </ProdctPrice>
-        <DeleteProductContainer
-          onClick={() => DeleteProduct(item.id, item.quantity)}
-        >
-          <DeleteOutline />
-        </DeleteProductContainer>
-      </CartProduct>
-    );
-  }
-}
+const CartItem = ({ item, Sno }) => {
+  const dispatch = useDispatch();
+  return (
+    <CartProduct>
+      <ProducImage>
+        <SNumber>{Sno}</SNumber>
+        <ImageContainer>
+          <Image src={item.img} />
+        </ImageContainer>
+      </ProducImage>
+      <ProdctDetails>
+        <Title>{item.title}</Title>
+        <Desc>{item["Main Features"]}</Desc>
+        <Desc>{item.desc}</Desc>
+      </ProdctDetails>
+      <ProdctPrice>
+        <Price>{item.priceQuantity} PKR</Price>
+        <QuantityPrice>
+          <QuantityButtonContainer>
+            <QuantityButton>
+              <Remove />
+            </QuantityButton>
+            <Quantity>{item.quantity}</Quantity>
+            <QuantityButton>
+              <Add />
+            </QuantityButton>
+          </QuantityButtonContainer>
+        </QuantityPrice>
+      </ProdctPrice>
+      <DeleteProductContainer
+        onClick={() =>
+          dispatch({
+            type: "ItemDeletedCart",
+            payload: item.id,
+          })
+        }
+      >
+        <DeleteOutline />
+      </DeleteProductContainer>
+    </CartProduct>
+  );
+};
 
 export default CartItem;

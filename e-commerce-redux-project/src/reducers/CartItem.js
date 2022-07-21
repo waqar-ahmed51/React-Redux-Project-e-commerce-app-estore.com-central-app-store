@@ -5,7 +5,7 @@ const CartItemReducer=(state = [], action)=>{
                 ...state,action.payload
             ]
         case "ItemDeletedCart":
-            return state.filter(item =>item.id !==action.payload.id)
+            return state.filter(item =>item.id !== action.payload)
         default:
             return state
     }
