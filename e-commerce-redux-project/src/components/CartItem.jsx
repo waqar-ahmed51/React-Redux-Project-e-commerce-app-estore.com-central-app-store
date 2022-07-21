@@ -136,7 +136,14 @@ const CartItem = ({ item, Sno }) => {
             </QuantityButton>
             <Quantity>{item.quantity}</Quantity>
             <QuantityButton>
-              <Add />
+              <Add
+                onClick={() =>
+                  dispatch({
+                    type: "IncreaseQuantity",
+                    payload: item.id,
+                  })
+                }
+              />
             </QuantityButton>
           </QuantityButtonContainer>
         </QuantityPrice>

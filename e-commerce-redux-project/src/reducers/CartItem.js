@@ -6,6 +6,8 @@ const CartItemReducer=(state = [], action)=>{
             ]
         case "ItemDeletedCart":
             return state.filter(item =>item.id !== action.payload)
+        case "IncreaseQuantity":
+            return [...state,state[action.payload].quantity++]
         default:
             return state
     }
