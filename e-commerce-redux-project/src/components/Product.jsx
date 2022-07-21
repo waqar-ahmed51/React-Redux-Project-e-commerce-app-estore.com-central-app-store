@@ -110,18 +110,15 @@ const Icon = styled.div`
   }
 `;
 
-const Product = (props) => {
+const Product = ({ items }) => {
   const dispatch = useDispatch();
-
-  const item = props.items;
-  // console.log("Items from product : ", item);
   return (
     <Container>
-      <Image src={item.img} />
+      <Image src={items.img} />
       <ProductInfoGeneral>
-        <ProductTitle>{item.title}</ProductTitle>
-        <MainFeatures>{item["Main Features"]}</MainFeatures>
-        <ProductPrice>{item.price} PKR</ProductPrice>
+        <ProductTitle>{items.title}</ProductTitle>
+        <MainFeatures>{items["Main Features"]}</MainFeatures>
+        <ProductPrice>{items.price} PKR</ProductPrice>
       </ProductInfoGeneral>
       <Info>
         {/* <Icon onClick={() => props.addItemCart(item)}> */}
@@ -129,13 +126,13 @@ const Product = (props) => {
           onClick={() =>
             dispatch({
               type: "ItemAddedCart",
-              payload: item,
+              payload: items,
             })
           }
         >
           <ShoppingCartOutlined />
         </Icon>
-        <Link to={"/productview/" + item.id} className="CustomRouterLink">
+        <Link to={"/productview/" + items.id} className="CustomRouterLink">
           <Icon>
             <SearchOutlined />
           </Icon>
