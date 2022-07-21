@@ -4,6 +4,7 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Container = styled.div`
   height: 60px;
@@ -76,6 +77,10 @@ const MenuItem = styled.div`
 const Navbar = ({ ItemsInCart }) => {
   const navigate = useNavigate();
 
+  //React-Redux getting the store
+  const CartItem = useSelector((state) => state.CartItem);
+  
+
   const navigateToSearch = (keyword) => {
     // 👇️ navigate to search with keyword
     if (keyword !== "") {
@@ -145,7 +150,7 @@ const Navbar = ({ ItemsInCart }) => {
             </MenuItem>
             <MenuItem>
               <Link to="/cart" className="CustomRouterLink">
-                <Badge badgeContent={ItemsInCart} color="primary">
+                <Badge badgeContent={CartItem.length} color="primary">
                   <ShoppingCartOutlined />
                 </Badge>
               </Link>

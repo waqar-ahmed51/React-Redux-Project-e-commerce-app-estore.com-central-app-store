@@ -3,7 +3,7 @@ import totalCount from "./totalCount";
 import { combineReducers } from "redux";
 
 const allReducers=combineReducers({
-    CartItemReducer:CartItemReducer,
+    CartItem:CartItemReducer,
     totalCount:totalCount
 }) 
 

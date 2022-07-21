@@ -8,7 +8,7 @@ const CartProduct = styled.div`
   padding-bottom: 20px;
   padding-top: 20px;
 `;
-const ProducImage = styled.div`
+const ProducImage = styled.div` 
   position: relative;
   display: flex;
   justify-content: center;

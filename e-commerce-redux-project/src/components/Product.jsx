@@ -6,6 +6,7 @@ import {
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 const ProductInfoGeneral = styled.div`
   bottom: 0;
@@ -110,9 +111,10 @@ const Icon = styled.div`
 `;
 
 const Product = (props) => {
-  // console.log(items);
+  const dispatch = useDispatch();
 
   const item = props.items;
+  // console.log("Items from product : ", item);
   return (
     <Container>
       <Image src={item.img} />
@@ -122,7 +124,15 @@ const Product = (props) => {
         <ProductPrice>{item.price} PKR</ProductPrice>
       </ProductInfoGeneral>
       <Info>
-        <Icon onClick={() => props.addItemCart(item)}>
+        {/* <Icon onClick={() => props.addItemCart(item)}> */}
+        <Icon
+          onClick={() =>
+            dispatch({
+              type: "ItemAddedCart",
+              payload: item,
+            })
+          }
+        >
           <ShoppingCartOutlined />
         </Icon>
         <Link to={"/productview/" + item.id} className="CustomRouterLink">
@@ -130,9 +140,6 @@ const Product = (props) => {
             <SearchOutlined />
           </Icon>
         </Link>
-        {/* <Icon>
-          <FavoriteBorderOutlined />
-        </Icon> */}
       </Info>
     </Container>
   );
