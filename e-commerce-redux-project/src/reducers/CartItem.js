@@ -7,6 +7,15 @@ const InitialState = {
 const CartItemReducer = (state = InitialState, action) => {
   switch (action.type) {
     case "ItemAddedCart":{
+      // Check if Item already in Cart so prevent it adding again to cart
+    let addFlag = true;
+    for (const item of state.CartItems) {
+      // console.log(item.id);
+      if (item.id === action.payload.id) { 
+        addFlag = false;
+      }
+    }
+    if (addFlag) {
       //Getting the quanity of all Items in cart and storing to TotalCartItems
       let TotalCartIterator=0;
       for(const item of state.CartItems){
@@ -22,8 +31,13 @@ const CartItemReducer = (state = InitialState, action) => {
         // Updating the cart total quantity
         TotalCartItems:TotalCartIterator,
         totalPriceCartItems:state.totalPriceCartItems+action.payload.price,
-      };
+      }
+    } else {
+      console.log("Item already in Cart!---------");
+    };
+    return state;
     }
+    
     case "ItemDeletedCart":{
       const itemquantity=action.payload.quantity;
 

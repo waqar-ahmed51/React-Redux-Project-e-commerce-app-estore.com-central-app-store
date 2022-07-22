@@ -1,13 +1,8 @@
-import {
-  // FavoriteBorderOutlined,
-  SearchOutlined,
-  ShoppingCartOutlined,
-} from "@mui/icons-material";
+import { SearchOutlined, ShoppingCartOutlined } from "@mui/icons-material";
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
 
 const ProductInfoGeneral = styled.div`
   bottom: 0;
@@ -112,30 +107,7 @@ const Icon = styled.div`
 `;
 
 const Product = ({ items }) => {
-  //React-Redux getting the store
-  const StateStore = useSelector((state) => state.CartItem);
-
-  
-  //Handling Items to Cart
   const dispatch = useDispatch();
-  const handleAddItemCart = (itemsNew) => {
-    // Check if Item already in Cart so prevent it adding again to cart
-    let addFlag = true;
-    for (const item of StateStore.CartItems) {
-      // console.log(item.id);
-      if (item.id === items.id) { 
-        addFlag = false;
-      }
-    }
-    if (addFlag) {
-      dispatch({
-        type: "ItemAddedCart",
-        payload: items,
-      });
-    } else {
-      console.log("Item already in Cart!");
-    }
-  };
   return (
     <Container>
       <Image src={items.img} />
@@ -145,7 +117,14 @@ const Product = ({ items }) => {
         <ProductPrice>{items.price} PKR</ProductPrice>
       </ProductInfoGeneral>
       <Info>
-        <Icon onClick={() => handleAddItemCart(items)}>
+        <Icon
+          onClick={() =>
+            dispatch({
+              type: "ItemAddedCart",
+              payload: items,
+            })
+          }
+        >
           <ShoppingCartOutlined />
         </Icon>
         <Link to={"/productview/" + items.id} className="CustomRouterLink">
