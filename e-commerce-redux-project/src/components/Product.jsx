@@ -113,14 +113,14 @@ const Icon = styled.div`
 
 const Product = ({ items }) => {
   //React-Redux getting the store
-  const cartItems = useSelector((state) => state.CartItem);
+  const StateStore = useSelector((state) => state.CartItem);
 
   const dispatch = useDispatch();
   //Handling Items to Cart
   const handleAddItemCart = (itemsNew) => {
     // Check if Item already in Cart so prevent it adding again to cart
     let addFlag = true;
-    for (const item of cartItems) {
+    for (const item of StateStore.CartItems) {
       // console.log(item.id);
       if (item.id === items.id) {
         addFlag = false;
@@ -144,7 +144,7 @@ const Product = ({ items }) => {
         <ProductPrice>{items.price} PKR</ProductPrice>
       </ProductInfoGeneral>
       <Info>
-        <Icon onClick={() => handleAddItemCart(items)}> 
+        <Icon onClick={() => handleAddItemCart(items)}>
           <ShoppingCartOutlined />
         </Icon>
         <Link to={"/productview/" + items.id} className="CustomRouterLink">

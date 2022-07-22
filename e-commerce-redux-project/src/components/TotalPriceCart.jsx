@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 
 const TotalTitle = styled.h1`
   color: #3e3e3e;
@@ -14,7 +15,6 @@ const TotalPrice = styled.h1`
 const TotalItems = styled.h1`
   flex: 8;
   font-size: 20px;
-
 `;
 
 const TotalPriceContainer = styled.div`
@@ -38,14 +38,17 @@ const TotalPriceContainer = styled.div`
     color: white;
   }
 `;
-const TotalPriceCart = ({ totalItems, totalPriceCartItems }) => {
+const TotalPriceCart = () => {
+  //React-Redux getting the store
+  const StateStore = useSelector((state) => state.CartItem);
   return (
     <TotalPriceContainer>
-      <TotalItems> 
-        ( {totalItems} item{totalItems > 1 ? "s" : ""} )
+      <TotalItems>
+        ( {StateStore.TotalCartItems} item
+        {StateStore.TotalCartItems > 1 ? "s" : ""} )
       </TotalItems>
       <TotalTitle>Total </TotalTitle>
-      <TotalPrice>{totalPriceCartItems} PKR</TotalPrice>
+      <TotalPrice>{StateStore.totalPriceCartItems} PKR</TotalPrice>
     </TotalPriceContainer>
   );
 };

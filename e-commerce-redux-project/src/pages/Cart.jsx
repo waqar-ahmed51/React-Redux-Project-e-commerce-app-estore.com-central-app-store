@@ -21,18 +21,18 @@ const NothingCart = styled.div`
 
 const Cart = () => {
   //React-Redux getting the store
-  const cartItems = useSelector((state) => state.CartItem);
-  console.log("CartItem form redux store", cartItems);
+  const StateStore = useSelector((state) => state.CartItem);
+  console.log("CartItem form redux store", StateStore);
   // Varaible to be used for Searial numbers to produts and key id to products
   let Sno = 0;
 
   return (
     <div>
       <Container>
-        {cartItems.map((item) => (
+        {StateStore.CartItems.map((item) => (
           <CartItem item={item} key={Sno} Sno={++Sno} />
         ))}
-        {cartItems.length > 0 ? (
+        {StateStore.CartItems.length > 0 ? (
           <div>
             <TotalPriceCart />
             <CartCheckoutContinueShoppingButtons />

@@ -131,19 +131,26 @@ const CartItem = ({ item, Sno }) => {
         <Price>{item.priceQuantity} PKR</Price>
         <QuantityPrice>
           <QuantityButtonContainer>
-            <QuantityButton>
+            <QuantityButton
+              onClick={() =>
+                dispatch({
+                  type: "DecreaseQuantity",
+                  payload: item.id,
+                })
+              }
+            >
               <Remove />
             </QuantityButton>
             <Quantity>{item.quantity}</Quantity>
-            <QuantityButton>
-              <Add
-                onClick={() =>
-                  dispatch({
-                    type: "IncreaseQuantity",
-                    payload: item.id,
-                  })
-                }
-              />
+            <QuantityButton
+              onClick={() =>
+                dispatch({
+                  type: "IncreaseQuantity",
+                  payload: item.id,
+                })
+              }
+            >
+              <Add />
             </QuantityButton>
           </QuantityButtonContainer>
         </QuantityPrice>
@@ -152,7 +159,10 @@ const CartItem = ({ item, Sno }) => {
         onClick={() =>
           dispatch({
             type: "ItemDeletedCart",
-            payload: item.id,
+            payload: {
+              id: item.id,
+              quantity: item.quantity,
+            },
           })
         }
       >

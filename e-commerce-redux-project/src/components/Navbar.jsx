@@ -78,8 +78,7 @@ const Navbar = ({ ItemsInCart }) => {
   const navigate = useNavigate();
 
   //React-Redux getting the store
-  const CartItem = useSelector((state) => state.CartItem);
-  
+  const StateStore = useSelector((state) => state.CartItem);
 
   const navigateToSearch = (keyword) => {
     // 👇️ navigate to search with keyword
@@ -150,7 +149,7 @@ const Navbar = ({ ItemsInCart }) => {
             </MenuItem>
             <MenuItem>
               <Link to="/cart" className="CustomRouterLink">
-                <Badge badgeContent={CartItem.length} color="primary">
+                <Badge badgeContent={StateStore.TotalCartItems} color="primary">
                   <ShoppingCartOutlined />
                 </Badge>
               </Link>
