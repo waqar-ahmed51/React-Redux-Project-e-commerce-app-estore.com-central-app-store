@@ -162,6 +162,7 @@ const CartItem = ({ item, Sno }) => {
             payload: {
               id: item.id,
               quantity: item.quantity,
+              priceQuantity: item.priceQuantity,
             },
           })
         }

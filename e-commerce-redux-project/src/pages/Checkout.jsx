@@ -1,12 +1,10 @@
 import ShippingPayment from "../components/ShippingPayment";
 
-const Checkout = ({ totalCartItems, totalPriceCartItems }) => {
+const Checkout = () => {
+
   return (
     <div>
-      <ShippingPayment
-        totalCartItems={totalCartItems}
-        totalPriceCartItems={totalPriceCartItems}
-      />
+      <ShippingPayment />
     </div>
   );
 };

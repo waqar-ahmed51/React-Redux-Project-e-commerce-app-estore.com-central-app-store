@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 
 const Wrapper = styled.div`
   margin: 10px;
@@ -138,7 +139,10 @@ const MessageText = styled.p`
   font-size: 15px;
 `;
 
-const ShippingPayment = ({ totalCartItems, totalPriceCartItems }) => {
+const ShippingPayment = () => {
+  //React-Redux getting the store
+  const StateStore = useSelector((state) => state.CartItem);
+
   function ValidateShippingPayment() {
     // Register Form validation starts here.
     var validationCheck = true; // a variable which will be ture after all validation checkups
@@ -204,7 +208,6 @@ const ShippingPayment = ({ totalCartItems, totalPriceCartItems }) => {
     }
   }
 
-  totalPriceCartItems = totalPriceCartItems[totalPriceCartItems.length - 1];
   return (
     <Wrapper>
       <ShippingPaymentContainer>
@@ -213,20 +216,22 @@ const ShippingPayment = ({ totalCartItems, totalPriceCartItems }) => {
           <SummaryTitle>Summary</SummaryTitle>
           <PriceContianer>
             <PriceTitle>Subtotal </PriceTitle>
-            <PriceDetail>{totalPriceCartItems} PKR</PriceDetail>
+            <PriceDetail>{StateStore.totalPriceCartItems} PKR</PriceDetail>
           </PriceContianer>
           <PriceContianer>
             <PriceTitle>Delivery </PriceTitle>
             <PriceDetail>1000 PKR</PriceDetail>
           </PriceContianer>
           <PriceContianer>
-            <PriceTitle>{totalCartItems > 1 ? "Items" : "Item"}</PriceTitle>
-            <PriceDetail>{totalCartItems}</PriceDetail>
+            <PriceTitle>
+              {StateStore.TotalCartItems > 1 ? "Items" : "Item"}
+            </PriceTitle>
+            <PriceDetail>{StateStore.TotalCartItems}</PriceDetail>
           </PriceContianer>
           <PriceContianer>
             <PriceTitle style={{ fontSize: "30px" }}>Total </PriceTitle>
             <PriceDetail style={{ fontSize: "30px" }}>
-              {totalPriceCartItems + 1000} PKR
+              {StateStore.totalPriceCartItems + 1000} PKR
             </PriceDetail>
           </PriceContianer>
         </PurchaseSummary>
