@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { ShoppingCartOutlined } from "@mui/icons-material";
 import { useParams } from "react-router-dom";
 import { allProducts } from "../data";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 const Wrapper = styled.div`
   padding: 50px;
@@ -124,6 +126,29 @@ const ProductViewDetails = (props) => {
       </SpecContianer>
     );
   }
+  //React-Redux getting the store
+  const StateStore = useSelector((state) => state.CartItem);
+  //Handling Items to Cart
+  const dispatch = useDispatch();
+  const handleAddItemCart = (itemsNew) => {
+    // Check if Item already in Cart so prevent it adding again to cart
+    let addFlag = true;
+    for (const item of StateStore.CartItems) {
+      // console.log(item.id);
+      if (item.id === allProducts[id].id) {
+        addFlag = false;
+      }
+    }
+    if (addFlag) {
+      dispatch({
+        type: "ItemAddedCart",
+        payload: allProducts[id],
+      });
+    } else {
+      console.log("Item already in Cart!");
+    }
+  };
+
   return (
     <Wrapper>
       <ImageContainer>
@@ -138,7 +163,7 @@ const ProductViewDetails = (props) => {
           <Price id="prodcut_total_price">{allProducts[id].price}</Price>
           <Currency>PKR</Currency>
         </QuantityPrice>
-        <AddCart onClick={() => props.addItemCart(allProducts[id])}>
+        <AddCart onClick={() => handleAddItemCart(allProducts[id])}>
           <ShoppingCartOutlined style={{ marginRight: "20px" }} />
           Add to Cart
         </AddCart>

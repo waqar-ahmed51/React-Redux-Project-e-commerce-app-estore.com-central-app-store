@@ -115,14 +115,15 @@ const Product = ({ items }) => {
   //React-Redux getting the store
   const StateStore = useSelector((state) => state.CartItem);
 
-  const dispatch = useDispatch();
+  
   //Handling Items to Cart
+  const dispatch = useDispatch();
   const handleAddItemCart = (itemsNew) => {
     // Check if Item already in Cart so prevent it adding again to cart
     let addFlag = true;
     for (const item of StateStore.CartItems) {
       // console.log(item.id);
-      if (item.id === items.id) {
+      if (item.id === items.id) { 
         addFlag = false;
       }
     }
