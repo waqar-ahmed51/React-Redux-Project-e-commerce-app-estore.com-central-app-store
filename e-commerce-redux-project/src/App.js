@@ -38,6 +38,10 @@ class App extends Component {
         <PopMessage id="popMessage" ></PopMessage>
       <Routes>
           <Route path="/" element={<Home />} />
+
+          {/* Same link for github pages */}
+          <Route path="/React-Redux-Project-e-commerce-app-estore.com-central-app-store/" element={<Home/>} />
+
           <Route path="/productlist/:category" element={<ProductList />} />
           <Route path="/productview/:id" element={<ProductView />} />
           <Route path="/register" element={<Register />} />

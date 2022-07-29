@@ -93,6 +93,7 @@ const CartItemReducer = (state = InitialState, action) => {
       const qunatity = newArray[index].quantity;
       if (qunatity < 1) {
         newArray[index].quantity = 1;
+        // newArray[index].priceQuantity=newArray[index].priceQuantity;
       }else{
         --TotalCartIterator;
       }
