@@ -78,6 +78,7 @@ const CartItemReducer = (state = InitialState, action) => {
     case "DecreaseQuantity": {
       //Getting the quanity of all Items in cart and storing to TotalCartItems
       let TotalCartIterator=0;
+      let totalPriceCartItemsDec=state.totalPriceCartItems;
       for(const item of state.CartItems){
         // Getting previous total items in cart;
         TotalCartIterator=TotalCartIterator+item.quantity;
@@ -93,9 +94,10 @@ const CartItemReducer = (state = InitialState, action) => {
       const qunatity = newArray[index].quantity;
       if (qunatity < 1) {
         newArray[index].quantity = 1;
-        // newArray[index].priceQuantity=newArray[index].priceQuantity;
+        totalPriceCartItemsDec=state.totalPriceCartItems;
       }else{
         --TotalCartIterator;
+        totalPriceCartItemsDec=state.totalPriceCartItems-newArray[index].price;
       }
       // Updating the price with quantity
       newArray[index].priceQuantity=newArray[index].price*newArray[index].quantity;
@@ -103,7 +105,7 @@ const CartItemReducer = (state = InitialState, action) => {
         ...state, //copying the orignal state
         CartItems: newArray, //reassingning CartItem to new array
         TotalCartItems:TotalCartIterator,
-        totalPriceCartItems:state.totalPriceCartItems-newArray[index].price,
+        totalPriceCartItems:totalPriceCartItemsDec,
       };
     }
     default:
